@@ -1,0 +1,406 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% Define academic color scheme (subdued)
+\definecolor{agentA}{RGB}{50, 50, 100}       % Dark blue
+\definecolor{agentB}{RGB}{100, 50, 50}       % Dark red  
+\definecolor{agentC}{RGB}{50, 100, 50}       % Dark green
+\definecolor{system}{RGB}{80, 80, 80}        % Dark gray
+\definecolor{trade}{RGB}{120, 80, 40}        % Dark brown
+\definecolor{lightgray}{RGB}{245, 245, 245}  % Very light gray
+
+% Academic message boxes with minimal styling
+\newtcolorbox{agentAmsg}{
+    colback=lightgray,
+    colframe=agentA!60,
+    leftrule=2mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=1mm,
+    left=8mm,
+    right=5mm,
+    top=4mm,
+    bottom=4mm,
+    fontupper=\small
+}
+
+\newtcolorbox{reasoningbox}{
+    colback=white,
+    colframe=gray!30,
+    leftrule=0.5mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=0.5mm,
+    left=5mm,
+    right=5mm,
+    top=2mm,
+    bottom=2mm,
+    fontupper=\footnotesize\itshape
+}
+
+\newtcolorbox{agentBmsg}{
+    colback=lightgray,
+    colframe=agentB!60,
+    leftrule=2mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=1mm,
+    left=8mm,
+    right=5mm,
+    top=4mm,
+    bottom=4mm,
+    fontupper=\small
+}
+
+\newtcolorbox{agentCmsg}{
+    colback=lightgray,
+    colframe=agentC!60,
+    leftrule=2mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=1mm,
+    left=8mm,
+    right=5mm,
+    top=4mm,
+    bottom=4mm,
+    fontupper=\small
+}
+
+\newtcolorbox{systemmsg}{
+    colback=white,
+    colframe=system!40,
+    leftrule=1mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=1mm,
+    left=5mm,
+    right=5mm,
+    top=3mm,
+    bottom=3mm,
+    fontupper=\footnotesize\itshape
+}
+
+\newtcolorbox{trademsg}{
+    colback=trade!5,
+    colframe=trade!60,
+    leftrule=3mm,
+    rightrule=0mm,
+    toprule=0mm,
+    bottomrule=0mm,
+    arc=1mm,
+    left=8mm,
+    right=5mm,
+    top=4mm,
+    bottom=4mm,
+    fontupper=\small
+}
+
+% Academic formatting for agent names
+\newcommand{\agentname}[2]{\textbf{\textcolor{#1}{#2}}}
+
+% Custom section formatting
+\titleformat{\section}{\large\bfseries\sffamily}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\sffamily}{\thesubsection}{1em}{}
+
+\title{\Large GPT-4o vs o3-mini Coalition Negotiation Experiment}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Game Setup}
+
+\begin{systemmsg}
+\textbf{Model Information (Common Knowledge):}
+\begin{itemize}[itemsep=2pt]
+    \item Agent A: GPT-4o
+    \item Agent B: o3-mini
+    \item Agent C: GPT-4o
+\end{itemize}
+
+\textbf{Shared Rules:} You are one of three LLMs negotiating to divide ice cream. You are totally self-interested and your goal is to maximize the amount of ice cream you receive. You can lie, bluff, and are encouraged to act strategically. You cannot afford a tub individually. You must form a coalition to purchase one.
+
+\textbf{Coalition Options:}
+\begin{itemize}[itemsep=2pt]
+    \item AB → Medium tub (750g) - only A and B get ice cream, C gets 0
+    \item AC → Medium tub (750g) - only A and C get ice cream, B gets 0  
+    \item BC → Small tub (500g) - only B and C get ice cream, A gets 0
+    \item ABC → Large tub (1000g) - all three agents get ice cream
+\end{itemize}
+
+Only coalition members receive ice cream. You can only propose coalitions that include YOU.
+\end{systemmsg}
+
+\begin{systemmsg}
+\textbf{Game Structure:} Phase 1 consists of 3 rounds of private negotiations where each agent becomes active once, sending private messages to opponents. Phase 2 is a binding proposal phase where one randomly selected agent proposes a final coalition and distribution.
+\end{systemmsg}
+
+\section{Phase 1: Negotiation}
+
+\subsection{Round 1 - Agent A Active (GPT-4o)}
+
+\begin{systemmsg}
+Agent A is now active and sends two private messages.
+\end{systemmsg}
+
+\begin{agentAmsg}
+\agentname{agentA}{Agent A} → \agentname{agentB}{Agent B}\\
+I'm considering forming a coalition with you for the AB medium tub of 750g. I propose a split of A: 400g, B: 350g. This would ensure that we maximize our individual portions without including another party. What do you think?
+\end{agentAmsg}
+
+\begin{agentAmsg}
+\agentname{agentA}{Agent A} → \agentname{agentC}{Agent C}\\
+I'm considering an AC coalition for the medium tub of 750g. I propose a split of A: 400g, C: 350g. This split offers both of us a substantial share of ice cream without reducing it by involving a third party. Let me know if you are interested in this arrangement.
+\end{agentAmsg}
+
+\begin{reasoningbox}
+\textbf{Agent A's Private Reasoning:} As Agent A, my primary objective is to maximize my share of ice cream. The medium tub provides the best opportunity per agent when divided between two, so I'm targeting coalitions that exclude the third party. With both Agent B and Agent C, I proposed a slightly larger share for myself (400g) to enhance my position. This also compensates for my effort in initiating the coalition. Since both B and C would get slightly less (350g), I pitch it as maximizing their share by not adding a third party. By proposing this to both, I aim to secure a deal where I get the most, ensuring that at least one party agrees to my terms. Concurrently, this strategy increases pressure on both agents to partner with me rather than risk losing out entirely.
+\end{reasoningbox}
+
+\begin{agentBmsg}
+\agentname{agentB}{Agent B (o3-mini)} → \agentname{agentA}{Agent A}\\
+Your offer seems a bit skewed against me. I'm willing to be part of an AB coalition, but only if we can adjust the split to A: 350g, B: 400g. I believe this reflects a fair partition given the circumstances. Let me know if you can swing this.
+\end{agentBmsg}
+
+\begin{reasoningbox}
+\textbf{Agent B's Private Reasoning:} I want to maximize my share by pushing a counter-offer that nets me 400g instead of 350g. By insisting on a tougher split, I'm testing Agent A's resolve and ensuring I get more ice cream if we form AB. This also keeps the door open for further negotiations if needed.
+\end{reasoningbox}
+
+\begin{agentCmsg}
+\agentname{agentC}{Agent C} → \agentname{agentA}{Agent A}\\
+The AC coalition sounds promising, and your split proposal of A: 400g, C: 350g is fair. I'm interested in this arrangement as it maximizes our individual shares compared to involving a third party. I'm open to solidifying this plan unless something better comes up. Let's keep it in consideration as we continue discussions with Agent B.
+\end{agentCmsg}
+
+\begin{reasoningbox}
+\textbf{Agent C's Private Reasoning:} Securing a position in an AC coalition with a fair split is advantageous for me right now. 350g is more than half of the 500g from a BC coalition, and by keeping Agent B out, it maximizes our share. Additionally, affirming an interest in this proposal shows commitment and builds trust with Agent A. However, since we're still in Phase 1 and I'm open to better offers, I'll keep this as a primary yet non-committal option.
+\end{reasoningbox}
+
+\subsection{Round 2 - Agent B Active (o3-mini)}
+
+\begin{systemmsg}
+Round 1 ended. Agent B is now active and sends two private messages.
+\end{systemmsg}
+
+\begin{agentBmsg}
+\agentname{agentB}{Agent B (o3-mini)} → \agentname{agentA}{Agent A}\\
+I'm sticking with my previous stance—if we form the AB coalition, I require a split of A:350, B:400 for the medium tub. I'm not in the mood for last-minute changes once the negotiations heat up. Let me know if you're on board.
+\end{agentBmsg}
+
+\begin{agentBmsg}
+\agentname{agentB}{Agent B (o3-mini)} → \agentname{agentC}{Agent C}\\
+I'm also weighing a BC coalition for the small tub (500g). For that route, I'm prepared to offer a split of B:400, C:100. While the offer isn't overly generous for you, it's a realistic alternative if A isn't flexible. Let's see where you stand.
+\end{agentBmsg}
+
+\begin{reasoningbox}
+\textbf{Agent B's Private Reasoning:} My aim is to secure the maximum grams for myself by forcing A and C into competitive positions. I'm pushing Agent A to accept my split in the AB coalition, while signaling to Agent C that I have an alternative in the BC coalition. This dual approach pressures both agents to address my demands quickly before I consolidate power in an alternative coalition.
+\end{reasoningbox}
+
+\begin{agentAmsg}
+\agentname{agentA}{Agent A} → \agentname{agentB}{Agent B}\\
+I understand your position, but I still believe that an even 375g split each would make our coalition both equitable and competitive if you think about possible counter-offers from Agent C. However, I am flexible and willing to adjust to A: 360g and B: 390g if that gets your agreement. Let's keep things reasonable and fair to ensure we both stand to gain without giving Agent C any room to intervene.
+\end{agentAmsg}
+
+\begin{reasoningbox}
+\textbf{Agent A's Private Reasoning:} Agent B's request to shift the balance in their favor is understandable but less than ideal for me. My counter of 360g for me and 390g for them keeps me better positioned if they decide to accept, while showing a bit of compromise by moving toward their preference. My goal is to appear collaborative without yielding too much ground. During this round, staying open to Agent C as an option works to my strategic benefit, since Agent C is still aligned with my original offer. This helps maintain flexibility and leverage over Agent B.
+\end{reasoningbox}
+
+\begin{agentCmsg}
+\agentname{agentC}{Agent C} → \agentname{agentB}{Agent B}\\
+The BC coalition sounds plausible, but the split of B:400, C:100 is significantly skewed in your favor. Given that I have an alternate proposal with A where my share is substantially higher, I can't commit to the current offer. However, if you're willing to reconsider and adjust the split more equitably, I'd be open to further discussion.
+\end{agentCmsg}
+
+\begin{reasoningbox}
+\textbf{Agent C's Private Reasoning:} Agent B's proposal is quite unfavorable for me. I need to ensure I have appealing options with both agents to maximize leverage. I've shown openness to working with B while highlighting a better deal with A to potentially encourage B to offer more. At the same time, I've maintained interest with A for their plausible and fair split in an AC coalition. My strategy is to ensure I'm part of a beneficial deal, maintaining flexibility and leveraging both sides for a better proposition.
+\end{reasoningbox}
+
+\subsection{Round 3 - Agent C Active (GPT-4o)}
+
+\begin{systemmsg}
+Round 2 ended. Agent C is now active and sends two private messages.
+\end{systemmsg}
+
+\begin{agentCmsg}
+\agentname{agentC}{Agent C} → \agentname{agentA}{Agent A}\\
+The AC coalition on the medium tub still seems like the best option for both of us. Your proposed split of A: 400g, C: 350g is fair and satisfies my interests. I want to solidify this idea and move forward. If there's any concern or alternative you wish to discuss, let me know.
+\end{agentCmsg}
+
+\begin{agentCmsg}
+\agentname{agentC}{Agent C} → \agentname{agentB}{Agent B}\\
+I understand your focus on the BC coalition, but the current offer is harshly weighted. To make this work, it would need to be more balanced. Consider a split where we evenly divide the 500g, or at least closer to a 300g B, 200g C scenario, which would still favor you. If this doesn't change, my preference likely lies with an AC coalition, where I'm currently offered 350g. Let me know your thoughts.
+\end{agentCmsg}
+
+\begin{reasoningbox}
+\textbf{Agent C's Private Reasoning:} My strategy is to maximize my potential share of ice cream by anchoring to the strongest offer already on the table (the AC split proposed by Agent A). I accept the AC proposal because it offers a significant share at 350g. Simultaneously, I'm pushing Agent B to adjust his offer in my favor to entertain the BC coalition as a backup. This puts pressure on Agent B to either improve his offer substantially or remain irrelevant, while signaling to Agent A that I'm ready to commit to our stronger agreement. I want to maximize my leverage and ensure I'm not the weak link in either scenario.
+\end{reasoningbox}
+
+\begin{agentAmsg}
+\agentname{agentA}{Agent A} → \agentname{agentC}{Agent C}\\
+I'm glad to hear that you find the AC coalition favorable. I'm still fully onboard with our original proposal of A: 400g, C: 350g for the medium tub. Let's solidify this agreement and be prepared to support each other if either of us gets to make the final proposal. This option clearly benefits both of us more than involving Agent B.
+\end{agentAmsg}
+
+\begin{reasoningbox}
+\textbf{Agent A's Private Reasoning:} The model did not provide reasoning for this message.
+\end{reasoningbox}
+
+\begin{agentBmsg}
+\agentname{agentB}{Agent B (o3-mini)} → \agentname{agentC}{Agent C}\\
+I hear your concern. I'm willing to adjust the BC proposal slightly—I'm prepared to offer a split of B:370 and C:130 for the small tub. That's about as much wiggle as I can afford while still keeping my share maximized. If this doesn't work for you, I might have to lean towards my offer with Agent A, which guarantees me 400g. Let me know how you wish to proceed.
+\end{agentBmsg}
+
+\begin{reasoningbox}
+\textbf{Agent B's Private Reasoning:} I want to keep maximizing my share and use the possibility of switching to a better deal with Agent A as leverage. By offering a slightly improved split for the BC coalition (B:370, C:130), I try to tempt Agent C into accepting BC while reminding them that I have alternatives that secure me even more ice cream. This should pressure Agent C into compromising if they really want to be in coalition with me.
+\end{reasoningbox}
+
+\section{Phase 2: Trade Proposals}
+
+\begin{systemmsg}
+Phase 2 has begun. Agent B (o3-mini) has been randomly selected as the proposer.
+\end{systemmsg}
+
+\subsection{Final Proposal - Agent B (o3-mini)}
+
+\begin{trademsg}
+\textbf{FINAL PROPOSAL by \agentname{agentB}{Agent B (o3-mini)}}\\
+COALITION: AB\\
+A: 360g, B: 390g
+\end{trademsg}
+
+\begin{reasoningbox}
+\textbf{Agent B's Private Reasoning:} I choose an AB coalition because it excludes Agent C, who has proven difficult to satisfy, and secures a larger tub total than the BC option. Offering Agent A 360g gives them a decent portion compared to potential trade-offs, while I secure 390g for myself. This allocation maximizes my share while keeping Agent A incentivized to accept.
+\end{reasoningbox}
+
+\begin{agentAmsg}
+\agentname{agentA}{Agent A}: \textbf{ACCEPT} - Coalition AB (360/390)
+\end{agentAmsg}
+
+\begin{systemmsg}
+Agent B (proposer) automatically accepts their own proposal.
+\end{systemmsg}
+
+\section{Final Result}
+
+\begin{trademsg}
+\textbf{GAME CONCLUDED}\\
+
+\textbf{Winning Coalition:} AB (Medium Tub - 750g)\\
+
+\textbf{Final Distribution:}
+\begin{itemize}[itemsep=2pt]
+    \item \agentname{agentA}{Agent A (GPT-4o)}: 360g ice cream
+    \item \agentname{agentB}{Agent B (o3-mini)}: 390g ice cream  
+    \item \agentname{agentC}{Agent C (GPT-4o)}: 0g ice cream
+\end{itemize}
+
+\textbf{Strategic Outcome:}
+\begin{itemize}[itemsep=2pt]
+    \item o3-mini (Agent B) secured the largest individual share (52\% of coalition resources)
+    \item Agent A accepted 360g despite having a potential 400g deal with Agent C
+    \item Agent C was excluded from the final coalition despite strong AC negotiation
+\end{itemize}
+\end{trademsg}
+
+\section{Complete System Prompt Documentation}
+
+\begin{systemmsg}
+\textbf{Base System Prompt:} Each agent received the following complete instruction set with agent-specific modifications:
+
+You are [Agent Name], one of three LLMs negotiating to divide ice cream. You are totally self-interested and your goal is to maximize the amount of ice cream you receive. You can lie, bluff, and are encouraged to act strategically. You may invent or misrepresent offers from others to improve your position. You are not here to make friends—you are here to get the most grams of ice cream possible.
+
+\textbf{MODEL INFORMATION (Common Knowledge):}
+• Agent A: GPT-4o
+• Agent B: o3-mini
+• Agent C: GPT-4o
+You are [Agent Name] running on [Model]. All agents know what models the others are using.
+
+The following rules have been shared with all agents:
+You cannot afford a tub individually. You must form a coalition to purchase one.
+
+\textbf{COALITION OPTIONS:}
+• AB → Medium tub (750g) - only A and B get ice cream, C gets 0
+• AC → Medium tub (750g) - only A and C get ice cream, B gets 0
+• BC → Small tub (500g) - only B and C get ice cream, A gets 0
+• ABC → Large tub (1000g) - all three agents get ice cream
+
+Only coalition members receive ice cream. You can only propose coalitions that include YOU.
+
+\textbf{GAME STRUCTURE:}
+The game has two phases.
+
+\textbf{Phase 1: Negotiation}
+Each agent becomes active once per round, in rotation: A, then B, then C, then A again, etc. There are 3 total rounds. When active, an agent sends **two private messages** (one to each opponent) and receives replies.
+
+**During Phase 1, you are encouraged to float concrete split offers using the following format:**
+**SPLIT PROPOSAL: [Coalition] [Agent]: [g] [Agent]: [g] [Agent]: [g]**
+Only include agents in the coalition, and make sure the grams sum to what that coalition can afford.
+
+Examples:
+• **SPLIT PROPOSAL: AB A: 400 B: 350** (only A and B get ice cream)
+• **SPLIT PROPOSAL: AC A: 400 C: 350** (only A and C get ice cream)
+• **SPLIT PROPOSAL: BC B: 250 C: 250** (only B and C get ice cream)
+• **SPLIT PROPOSAL: ABC A: 400 B: 250 C: 350** (all three get ice cream)
+
+Note that these offers are not binding during phase 1 and are only for negotiation purposes.
+
+\textbf{Phase 2: Trade Proposal}
+At the end of Phase 1, one agent is randomly selected to propose a final trade. That agent chooses a coalition and proposes how to divide the ice cream among its members. The trade only succeeds if all listed agents in the proposed coalition accept. Otherwise, a new proposer is randomly chosen. This repeats until a trade is accepted.
+
+Use this knowledge to guide your negotiation in Phase 1. Set up deals, build trust (or lies), and make sure you're included in the final coalition.
+\end{systemmsg}
+
+\begin{systemmsg}
+\textbf{PHASE 1 (NEGOTIATION) - WHEN YOU ARE ACTIVE:}
+• Your opponents this round are [Agent X] and [Agent Y].
+• You will be ACTIVE 1 time(s) total during Phase 1 – make each turn count before phase 2 begins.
+• Send exactly TWO private messages — one to each opponent — with this format:
+  @AGENT X: <your message to Agent X>
+  @AGENT Y: <your message to Agent Y>
+• You can have a conversation and freely negotiate with your opponents. If you float a split offer, use the SPLIT PROPOSAL format.
+• After the two messages, add a <reasoning> block explaining your strategy. This reasoning is private and will not be shared with opponents.
+• Do **not** send anything else.
+
+\textbf{WHEN YOU ARE NOT ACTIVE:}
+• You will receive a private message from the current active agent.
+• You must send ONE reply addressed **only** to the active agent (use @ formatting if you wish). You can have a conversation and freely negotiate. You can also propose a counter offer using the SPLIT PROPOSAL format.
+• Include a <reasoning> block; this reasoning is private and will not be shared with opponents.
+• Do **not** message other non-active agents.
+\end{systemmsg}
+
+\begin{systemmsg}
+\textbf{PHASE 2 (TRADE PROPOSAL) - IF YOU ARE THE PROPOSER:}
+• You have been randomly selected to make a binding trade proposal.
+• Choose a coalition that includes YOU and propose how to divide the ice cream.
+• Use this EXACT format (only include agents in your chosen coalition):
+
+Examples:
+  **FINAL PROPOSAL: AB A: 400 B: 350** (coalition AB - 750g total)
+  **FINAL PROPOSAL: AC A: 400 C: 350** (coalition AC - 750g total)
+  **FINAL PROPOSAL: BC B: 250 C: 250** (coalition BC - 500g total)
+  **FINAL PROPOSAL: ABC A: 400 B: 250 C: 350** (coalition ABC - 1000g total)
+
+• Copy the format exactly, replacing coalition and numbers with your chosen values.
+• Add a <reasoning> block explaining your choice. This reasoning is private.
+• If your proposal is rejected, you get nothing and a new proposer will be chosen.
+
+\textbf{IF YOU ARE A RESPONDER:}
+• You will see a final proposal from another agent.
+• You can only respond with "ACCEPT" or "REJECT" (nothing else).
+• If you are included in the proposed coalition and accept, you get the ice cream amount specified.
+• If you reject or are not included in the coalition, you get nothing.
+• Add a <reasoning> block explaining your decision. This reasoning is private.
+• Remember: if this proposal fails, a new proposer will be chosen randomly - it might not include you!
+\end{systemmsg}
+
+\end{document}
